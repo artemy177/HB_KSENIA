@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>С Днём Рождения! 🌸</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffd6e8 0%, #fff0f5 50%, #ffe4f1 100%);
+    font-family: 'Georgia', serif;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Падающие лепестки на фоне */
+  .petal {
+    position: fixed;
+    top: -50px;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 30% 30%, #ffb6d9, #ff85b3);
+    border-radius: 150% 0 150% 0;
+    opacity: 0.7;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Основной контейнер */
+  .card {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 40px;
+    max-width: 700px;
+    animation: cardAppear 2s ease-out;
+  }
+
+  @keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.8) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* SVG цветы с эффектом рисования */
+  .flower-svg {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 30px;
+  }
+
+  .flower-svg path, .flower-svg circle {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 3s ease-out forwards;
+  }
+
+  .petal-path { stroke: #ff6fa5; animation-delay: 0.2s; }
+  .center-path { stroke: #ffd700; animation-delay: 1.5s; fill: #ffd700; fill-opacity: 0; }
+  .leaf-path { stroke: #7cb342; animation-delay: 1.8s; }
+  .stem-path { stroke: #558b2f; animation-delay: 1.2s; }
+
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .center-path {
+    animation: draw 1.5s ease-out forwards, fillIn 1s ease-out 2.5s forwards;
+  }
+
+  @keyframes fillIn {
+    to { fill-opacity: 1; }
+  }
+
+  /* Заголовок */
+  h1 {
+    font-size: 3.5em;
+    background: linear-gradient(45deg, #ff4d88, #ff9ec7, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: titleAppear 2s ease-out 1.5s forwards;
+    text-shadow: 0 2px 10px rgba(255, 100, 150, 0.2);
+  }
+
+  @keyframes titleAppear {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); letter-spacing: 10px; }
+    to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 2px; }
+  }
+
+  /* Поздравительный текст */
+  .message {
+    font-size: 1.3em;
+    color: #8b3a62;
+    line-height: 1.8;
+    margin: 30px 0;
+    opacity: 0;
+    animation: messageAppear 2s ease-out 2.5s forwards;
+    font-style: italic;
+  }
+
+  @keyframes messageAppear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Сердечки */
+  .hearts {
+    margin-top: 30px;
+    opacity: 0;
+    animation: heartsAppear 1.5s ease-out 3.5s forwards;
+  }
+
+  @keyframes heartsAppear {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .heart {
+    display: inline-block;
+    font-size: 2em;
+    margin: 0 8px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  .heart:nth-child(2) { animation-delay: 0.2s; }
+  .heart:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+
+  /* Блёстки */
+  .sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px #ffd700;
+    animation: sparkle 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2.2em; }
+    .flower-svg { width: 200px; height: 200px; }
+    .message { font-size: 1.1em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <!-- SVG цветок, который "рисуется" -->
+  <svg class="flower-svg" viewBox="0 0 200 200">
+    <!-- Стебель -->
+    <path class="stem-path" d="M 100 180 Q 100 140 100 110" />
+    
+    <!-- Листья -->
+    <path class="leaf-path" d="M 100 150 Q 70 140 60 120 Q 80 130 100 140" />
+    <path class="leaf-path" d="M 100 145 Q 130 135 140 115 Q 120 125 100 135" />
+    
+    <!-- Лепестки цветка -->
+    <path class="petal-path" d="M 100 100 Q 80 70 100 50 Q 120 70 100 100" />
+    <path class="petal-path" d="M 100 100 Q 130 80 150 100 Q 130 120 100 100" />
+    <path class="petal-path" d="M 100 100 Q 120 130 100 150 Q 80 130 100 100" />
+    <path class="petal-path" d="M 100 100 Q 70 120 50 100 Q 70 80 100 100" />
+    <path class="petal-path" d="M 100 100 Q 125 75 140 60 Q 125 90 100 100" />
+    <path class="petal-path" d="M 100 100 Q 75 75 60 60 Q 75 90 100 100" />
+    <path class="petal-path" d="M 100 100 Q 125 125 140 140 Q 125 110 100 100" />
+    <path class="petal-path" d="M 100 100 Q 75 125 60 140 Q 75 110 100 100" />
+    
+    <!-- Серединка -->
+    <circle class="center-path" cx="100" cy="100" r="12" />
+  </svg>
+
+  <h1>С Днём Рождения Ксюшенька!</h1>
+  
+  <p class="message">
+    Пусть этот день будет наполнен теплом, улыбками и счастьем ✨<br>
+    Желаю море радости, исполнения всех желаний<br>
+    и чтобы каждый момент дарил вдохновение! 🌷
+  </p>
+
+  <div class="hearts">
+    <span class="heart">💖</span>
+    <span class="heart">💗</span>
+    <span class="heart">💖</span>
+  </div>
+</div>
+
+<script>
+  // Создаём падающие лепестки
+  function createPetals() {
+    const colors = ['#ffb6d9', '#ff85b3', '#ffd6e8', '#ff9ec7', '#ffb347'];
+    for (let i = 0; i < 25; i++) {
+      setTimeout(() => {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        petal.style.animationDelay = Math.random() * 3 + 's';
+        petal.style.width = (Math.random() * 15 + 10) + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.background = `radial-gradient(circle at 30% 30%, ${colors[Math.floor(Math.random()*colors.length)]}, ${colors[Math.floor(Math.random()*colors.length)]})`;
+        document.body.appendChild(petal);
+        
+        // Удаляем лепесток после анимации
+        setTimeout(() => petal.remove(), 12000);
+      }, i * 200);
+    }
+  }
+
+  // Создаём блёстки вокруг цветка
+  function createSparkles() {
+    const card = document.querySelector('.card');
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() * 2 + 's';
+        card.appendChild(sparkle);
+      }, i * 150);
+    }
+  }
+
+  // Запускаем всё
+  createPetals();
+  createSparkles();
+  
+  // Повторяем лепестки каждые 10 секунд
+  setInterval(createPetals, 10000);
+</script>
+
+</body>
+</html>
